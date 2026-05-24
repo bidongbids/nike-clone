@@ -10,7 +10,7 @@
   --shadow: 0 2px 16px rgba(0,0,0,0.10); --shadow-lg: 0 8px 32px rgba(0,0,0,0.18);
   --transition: 0.18s cubic-bezier(.4,0,.2,1);
 }
-html { scroll-behavior: smooth; }
+html, body { scroll-behavior: smooth; overflow-x: hidden; width: 100%; max-width: 100vw; }
 body { font-family: var(--font-body); background: var(--white); color: var(--black); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
@@ -20,7 +20,7 @@ ul { list-style: none; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--gray-100); }
 ::-webkit-scrollbar-thumb { background: var(--gray-400); border-radius: 3px; }
-.container { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+.container { max-width: 1440px; margin: 0 auto; padding: 0 48px; width: 100%; }
 @media (max-width: 768px) { .container { padding: 0 20px; } }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 28px; border-radius: 50px; font-weight: 600; font-size: 14px; letter-spacing: 0.5px; transition: all var(--transition); cursor: pointer; }
 .btn-primary { background: var(--black); color: var(--white); }
@@ -49,3 +49,91 @@ ul { list-style: none; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .spinner { width: 20px; height: 20px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin 0.6s linear infinite; display: inline-block; }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* MOBILE RESPONSIVE FIXES                                    */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Prevent text size adjustment on iOS */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* Phone breakpoint */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+
+  /* Buttons shouldn't overflow */
+  .btn { padding: 12px 22px; font-size: 13px; }
+  .btn-sm { padding: 10px 16px; font-size: 12px; }
+
+  /* Headings shouldn't be massive */
+  h1 { font-size: 32px !important; line-height: 1.1; }
+  h2 { font-size: 24px !important; }
+  h3 { font-size: 18px !important; }
+
+  /* Stack any 2-column grids to 1 column on phones */
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns: 1fr 360px"],
+  [style*="gridTemplateColumns: '1fr 360px'"],
+  [style*="gridTemplateColumns: '1fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Product grids: 4 cols → 2 cols on phones */
+  [style*="grid-template-columns: repeat(4, 1fr)"],
+  [style*="gridTemplateColumns: 'repeat(4, 1fr)'"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* Product grid 3 cols → 2 cols */
+  [style*="grid-template-columns: repeat(3, 1fr)"],
+  [style*="gridTemplateColumns: 'repeat(3, 1fr)'"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Force any horizontal flex with big gaps to wrap */
+  [style*="display: flex"] { flex-wrap: wrap; }
+
+  /* Modal sizing */
+  .modal { padding: 20px; max-height: 95vh; }
+
+  /* Toast wider on mobile */
+  .toast { min-width: auto; max-width: calc(100vw - 32px); }
+  .toast-container { right: 16px !important; left: 16px !important; }
+
+  /* Tables — let them scroll horizontally instead of breaking layout */
+  table { display: block; overflow-x: auto; white-space: nowrap; }
+
+  /* Form inputs full width by default */
+  .form-input { width: 100%; }
+
+  /* Padding adjustments */
+  [style*="padding: 48px"] { padding: 24px !important; }
+  [style*="padding: 60px"] { padding: 30px !important; }
+  [style*="padding: 80px"] { padding: 40px !important; }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .container { padding: 0 12px; }
+  h1 { font-size: 28px !important; }
+
+  /* Single column product grid on tiny screens */
+  [style*="grid-template-columns: repeat(2, 1fr)"]:not(.size-grid),
+  [style*="gridTemplateColumns: 'repeat(2, 1fr)'"]:not(.size-grid) {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Smaller buttons */
+  .btn { padding: 11px 18px; font-size: 12px; }
+
+  /* Stack hero CTA buttons */
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas .btn { width: 100%; }
+}
+
+/* Disable hover effects on touch devices (prevents stuck hover states) */
+@media (hover: none) {
+  .btn:hover, button:hover, a:hover { opacity: 1; transform: none; }
+}
