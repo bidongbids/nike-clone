@@ -18,14 +18,14 @@
 .admin-mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 199; }
 
 /* ── Main ── */
-.admin-main { flex: 1; margin-left: 240px; display: flex; flex-direction: column; min-height: 100vh; min-width: 0; }
-.admin-topbar { background: #fff; border-bottom: 1px solid var(--gray-200); padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; gap: 12px; }
+.admin-main { flex: 1; margin-left: 240px; display: flex; flex-direction: column; min-height: 100vh; }
+.admin-topbar { background: #fff; border-bottom: 1px solid var(--gray-200); padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
 .admin-page-title { font-family: var(--font-display); font-size: 22px; }
-.admin-topbar-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.admin-topbar-right { display: flex; align-items: center; gap: 12px; }
 .admin-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--black); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; flex-shrink: 0; }
 .admin-menu-btn { display: none; padding: 6px; border-radius: 6px; }
 .admin-menu-btn:hover { background: var(--gray-100); }
-.admin-content { padding: 28px 32px; flex: 1; min-width: 0; }
+.admin-content { padding: 28px 32px; flex: 1; }
 
 /* ── Stat Cards ── */
 .stat-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 28px; }
@@ -46,7 +46,6 @@
 .admin-table tr:last-child td { border-bottom: none; }
 .admin-table tbody tr:hover td { background: #fafafa; }
 .admin-table-empty { text-align: center; padding: 48px; color: var(--gray-500); }
-.admin-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
 /* ── Sections ── */
 .admin-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 12px; }
@@ -59,7 +58,7 @@
 .admin-modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .admin-modal-grid .full { grid-column: 1 / -1; }
 .admin-search { display: flex; align-items: center; gap: 8px; border: 1.5px solid var(--gray-200); border-radius: 8px; padding: 9px 14px; background: #fff; min-width: 220px; }
-.admin-search input { border: none; outline: none; font-size: 14px; flex: 1; min-width: 0; }
+.admin-search input { border: none; outline: none; font-size: 14px; flex: 1; }
 .admin-search:focus-within { border-color: var(--black); }
 
 /* ── Analytics bar chart ── */
@@ -69,69 +68,20 @@
 .bar { width: 100%; border-radius: 4px 4px 0 0; transition: height 0.4s ease; }
 .bar-label { font-size: 10px; color: var(--gray-400); }
 
-/* ════════════════════════════════════════════════════════════ */
-/* MOBILE — Tablet and below                                    */
-/* ════════════════════════════════════════════════════════════ */
-@media (max-width: 1100px) {
-  .stat-cards { grid-template-columns: repeat(2, 1fr); }
-}
-
+@media (max-width: 1100px) { .stat-cards { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 900px) {
-  /* Sidebar slides off-screen */
-  .admin-main { margin-left: 0 !important; width: 100%; }
-  .admin-sidebar { transform: translateX(-100%); width: 280px; }
+  .admin-main { margin-left: 0; }
+  .admin-sidebar { transform: translateX(-100%); }
   .admin-sidebar.open { transform: translateX(0); }
-  .admin-sidebar-close { display: flex; align-items: center; cursor: pointer; }
-  .admin-sidebar.open ~ .admin-mobile-overlay,
+  .admin-sidebar-close { display: flex; align-items: center; }
   .admin-mobile-overlay { display: block; }
-  .admin-menu-btn { display: flex; align-items: center; justify-content: center; cursor: pointer; }
-
-  /* Topbar shrinks */
-  .admin-topbar { padding: 12px 16px; }
-  .admin-page-title { font-size: 18px; }
-  .admin-topbar-right > div:last-child { display: none; } /* hide name/role text, keep avatar */
-
-  /* Content gets tight padding */
-  .admin-content { padding: 16px 12px; }
-
-  /* Stat cards stack */
-  .stat-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .stat-card { padding: 14px; }
-  .stat-value { font-size: 24px; }
-
-  /* Form grid collapses */
+  .admin-menu-btn { display: flex; }
+  .admin-content { padding: 20px 16px; }
+  .stat-cards { grid-template-columns: 1fr 1fr; }
   .admin-modal-grid { grid-template-columns: 1fr; }
   .admin-modal-grid .full { grid-column: 1; }
-
-  /* Tables scroll horizontally instead of breaking */
-  .admin-card { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .admin-table { min-width: 600px; }
-  .admin-table th, .admin-table td { padding: 10px 14px; font-size: 13px; }
-
-  /* Search inputs full width */
-  .admin-search { min-width: 0; width: 100%; }
-
-  /* Section headers stack */
-  .admin-section-title { font-size: 20px; }
-
-  /* Modal */
-  .modal { margin: 0 12px; padding: 20px !important; max-height: 90vh; }
 }
-
-@media (max-width: 480px) {
-  .stat-cards { grid-template-columns: 1fr; }
-  .admin-content { padding: 12px 8px; }
-  .admin-section-title { font-size: 18px; }
-  .admin-page-title { font-size: 16px; }
-  .admin-topbar { padding: 10px 12px; }
-
-  /* Hide ALL but the most essential stat sub-info */
-  .stat-sub { font-size: 10px; }
-
-  /* Smaller buttons */
-  .btn { padding: 10px 16px; font-size: 12px; }
-  .btn-sm { padding: 8px 12px; font-size: 11px; }
-}
+@media (max-width: 480px) { .stat-cards { grid-template-columns: 1fr; } }
 
 /* ── Role badge in sidebar ── */
 .admin-role-badge { padding: 10px 16px 14px; border-bottom: 1px solid #1f1f1f; }
