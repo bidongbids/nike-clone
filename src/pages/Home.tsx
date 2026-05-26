@@ -19,7 +19,7 @@ export default function Home() {
       <section className="hero">
         <div className="hero-content">
           <span className="hero-eyebrow">New Arrival</span>
-          <h1 className="hero-title">JUST DO<br />IT.</h1>
+          <h1 className="hero-title">DONT DO<br />IT.</h1>
           <p className="hero-sub">The latest Air Max innovation is here. Built for the streets, designed for your life.</p>
           <div className="hero-ctas">
             <Link to="/products" className="btn btn-primary">Shop Now <ArrowRight size={16} /></Link>
